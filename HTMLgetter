@@ -1,0 +1,25 @@
+#!/usr/local/bin/python
+
+# HTMLgetter v1.0 by Forgiven
+# This is a handy bit of python that will reap the HTML code of any page 
+# and output it to a txt file of your choice.
+
+import urllib2
+
+urlStr = raw_input('Input the full URL of the webpage whose HTML code you which to reap:')
+fileName = raw_input("Input the *.txt filename for the output:")
+fileName = fileName + ".txt"
+fileOut = open(fileName, "w")
+try:
+	fileHandle = urllib2.urlopen(urlStr)
+	str1 = fileHandle.read()
+	fileHandle.close()
+	print '-'*50
+	print 'HTML code of URL =', urlStr
+	print '-'*50
+except IOError:
+	print 'Cannot open URL %s for reading' % urlStr
+	str1 = 'error!'
+fileOut.writelines(str1)
+print str1
+fileOut.close()
